@@ -19,4 +19,4 @@ Route::get('/', function () {
 
 Route::get('/hello', function () {
 	return "Hello";
-})
+});
