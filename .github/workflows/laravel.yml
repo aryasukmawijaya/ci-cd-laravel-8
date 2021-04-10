@@ -37,3 +37,12 @@ jobs:
         DB_CONNECTION: sqlite
         DB_DATABASE: database/database.sqlite
       run: vendor/bin/phpunit
+    - name: Setup Deployer
+      uses: atymic/deployer-php-action@master
+      with:
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+        ssh-known-hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
+    - name: Deploy to Prod
+      env:
+        DOT_ENV: ${{ secrets.DOT_ENV_STAGING }}
+      run: dep deploy staging --tag=${{ env.GITHUB_REF }} -vvv
