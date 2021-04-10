@@ -45,4 +45,4 @@ jobs:
     - name: Deploy to Prod
       env:
         DOT_ENV: ${{ secrets.DOT_ENV_STAGING }}
-      run: dep deploy staging -vvv
+      run: dep deploy staging --tag=${{ env.GITHUB_REF }} -vvv
